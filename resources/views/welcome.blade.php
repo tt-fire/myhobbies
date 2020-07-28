@@ -81,8 +81,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Hallo - Laravel
+                    Hallo {{auth()->user()->name ?? ''}}- Laravel
                 </div>
+
+                {!! "<b>ich bin bold</b>" !!}<b></b>
+                {!! "<script>alert('hallo test');</script>" !!}
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
