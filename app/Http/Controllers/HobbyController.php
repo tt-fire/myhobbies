@@ -14,7 +14,10 @@ class HobbyController extends Controller
      */
     public function index()
     {
-        //zeigt alle Dateznsätze an
+        $hobbies = Hobby::all();
+        // dd($hobbies); //DD steht für Dump und Die
+        //zeigt alle Datensätze an
+        return view('hobby.index')->with('hobbies', $hobbies);
     }
 
     /**
@@ -25,6 +28,7 @@ class HobbyController extends Controller
     public function create()
     {
         //zeigt ein Formular für einen neuen Datensatz an!
+        return view('hobby.create');
     }
 
     /**
