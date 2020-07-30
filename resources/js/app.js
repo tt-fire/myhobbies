@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+//custom js file - mit "npm run watch" im Terminal = updates autom.!!!
+require('./custom');
 
 window.Vue = require('vue');
 
