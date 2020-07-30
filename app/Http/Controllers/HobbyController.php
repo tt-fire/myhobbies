@@ -39,7 +39,17 @@ class HobbyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //diese funktion muss aufgerufen werden um etwas zu speichern!
+        //dd($request); //um zu schauen was ankommt zum testen
+        $hobby = new Hobby(
+            [
+                'name' => $request->name,
+                'beschreibung' => $request['beschreibung']
+
+            ]
+        );
+        $hobby->save();
+        return redirect('/hobby');
     }
 
     /**
