@@ -16,7 +16,7 @@ class CreateHobbiesTable extends Migration
         Schema::create('hobbies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('beschreibung');
+            $table->text('beschreibung'); //->nullable() wenn man möchte dass das Feld auch leer sein kann!
             $table->timestamps();
         });
     }

@@ -41,6 +41,18 @@ class HobbyController extends Controller
     {
         //diese funktion muss aufgerufen werden um etwas zu speichern!
         //dd($request); //um zu schauen was ankommt zum testen
+        
+        // Validierung:
+        $request->validate(
+            [
+                'name' => 'required|min:3', //muss gefüllt sein und mind. 3 Zeichen!
+                // nachschauen unter Laravel Docs Validation und Version!
+                'beschreibung' => 'required|min:5'
+            ]
+        );
+        
+        
+        // hobby schreiben
         $hobby = new Hobby(
             [
                 'name' => $request->name,
