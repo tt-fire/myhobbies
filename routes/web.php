@@ -24,3 +24,6 @@ Route::get('/info', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Route für Hobby - Type resource ist eine Abkürzung für alle 7 Funktionen des Controllers
+Route::resource('hobby', 'Hobbycontroller');

@@ -14,7 +14,7 @@ class HobbyController extends Controller
      */
     public function index()
     {
-        //
+        //zeigt alle Dateznsätze an
     }
 
     /**
@@ -24,7 +24,7 @@ class HobbyController extends Controller
      */
     public function create()
     {
-        //
+        //zeigt ein Formular für einen neuen Datensatz an!
     }
 
     /**
@@ -46,7 +46,7 @@ class HobbyController extends Controller
      */
     public function show(Hobby $hobby)
     {
-        //
+        //zeigt einen einzelnen Datensatz an
     }
 
     /**
@@ -57,7 +57,7 @@ class HobbyController extends Controller
      */
     public function edit(Hobby $hobby)
     {
-        //
+        //einzelnen Datensatz bearbeiten
     }
 
     /**
