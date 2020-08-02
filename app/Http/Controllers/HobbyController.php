@@ -77,6 +77,7 @@ class HobbyController extends Controller
     public function show(Hobby $hobby)
     {
         //zeigt einen einzelnen Datensatz an
+        return view('hobby.show')->with('hobby', $hobby);
     }
 
     /**
