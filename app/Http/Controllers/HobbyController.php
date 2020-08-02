@@ -61,7 +61,11 @@ class HobbyController extends Controller
             ]
         );
         $hobby->save();
-        return redirect('/hobby');
+        //return redirect('/hobby'); //für die Ausgabe des Erfolges wird die Index Methode wieder aufgerufen! deshalb auskommentiert
+        // weil bei return geht es über die URL dann erst auf die index dabei ginge das "with" verloren!
+        return $this->index()->with([
+            'meldung_success' => 'Das Hobby <b>' . $hobby->name . '</b> wurde angelgt.'
+        ]);
     }
 
     /**

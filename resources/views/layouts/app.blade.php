@@ -83,17 +83,26 @@
         </nav>
 
         <main class="py-4">
-            @if($errors->any())
-            <div class="container">
-                <div class="alert alert-danger">
-                    Bitte überprüfe deine Eingabe!
-                    <ul class="mb-0">
-                        @foreach($errors->all() as $error)
-                            <li> {!! $error !!} </li>
-                        @endforeach
-                    </ul>
+            
+            @isset($meldung_success)
+                <div class="container">
+                    <div class="alert alert-success" role="alert">
+                        {!! $meldung_success !!}
+                    </div>
                 </div>
-            </div>
+            @endisset
+            
+            @if($errors->any())
+                <div class="container">
+                    <div class="alert alert-danger">
+                        Bitte überprüfe deine Eingabe!
+                        <ul class="mb-0">
+                            @foreach($errors->all() as $error)
+                                <li> {!! $error !!} </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
             @endif
             @yield('content')
         </main>
