@@ -89,6 +89,7 @@ class HobbyController extends Controller
     public function edit(Hobby $hobby)
     {
         //einzelnen Datensatz bearbeiten
+        return view('hobby.edit')->with('hobby' , $hobby);
     }
 
     /**
@@ -100,7 +101,30 @@ class HobbyController extends Controller
      */
     public function update(Request $request, Hobby $hobby)
     {
-        //
+        //schreibt das bearbeitete Hobby in die DB
+        // benötigt die Methode PUT oder Patch -> im Formular Hidden Feld "@method(put)"!!!
+        // request = felder evt. bearbeitet; hobby = instanz die bearbeitet wird
+        
+        // im prinzip von der "store" 
+        
+        $request->validate(
+          [
+            'name' => 'required|min:3', //muss gefüllt sein und mind. 3 Zeichen!
+            // nachschauen unter Laravel Docs Validation und Version!
+            'beschreibung' => 'required|min:5'
+          ]
+        );
+        
+        
+        // hobby schreiben - update!
+        $hobby->update([
+            'name' => $request->name,
+            'beschreibung' => $request->beschreibung
+        ]);
+
+        return $this->index()->with([
+            'meldung_success' => 'Das Hobby <b>' . $request->name . '</b> wurde erfolgreich bearbeitet.'
+        ]);
     }
 
     /**
