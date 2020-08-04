@@ -9,9 +9,9 @@
                 <div class="card-header">Hobby Detailansicht</div>
 
                 <div class="card-body">
-                    <p><b> {{ $hobby->name }} </b></p>
-                    <p> {{ $hobby->beschreibung }} </p>
-                    <a class="btn btn-success btn-sm mt-3" href="/hobby"> <i class="fas fa-arrow-circle-up"></i> Zurück zur Übersicht</a>
+                    <p><b> {{ $hobby->name ?? '' }} </b></p>
+                    <p> {{ $hobby->beschreibung ?? '' }} </p>
+                    <a class="btn btn-success btn-sm mt-3" href="/hobby"> <i class="fa fa-arrow-circle-up"></i> Zurück zur Übersicht</a>
                 </div>
             </div>
         </div>
