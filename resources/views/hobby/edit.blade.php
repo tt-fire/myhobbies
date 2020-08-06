@@ -20,7 +20,7 @@
                         </div>
                         <div class="form-group">
                             <label for="beschreibung">Beschreibung</label>
-                            <textarea class="form-control {{ $errors->has('beschreibung') ? 'border-danger' : '' }}" id="beschreibung" name="beschreibung" rows="5">{{ old('beschreibung') ?? $hobby->name }}</textarea>
+                            <textarea class="form-control {{ $errors->has('beschreibung') ? 'border-danger' : '' }}" id="beschreibung" name="beschreibung" rows="5">{{ old('beschreibung') ?? $hobby->beschreibung }}</textarea>
                             <small class="form-text text-danger"> {!! $errors->first('beschreibung') !!} </small> 
                         </div>
                         <input class="btn btn-primary mt-4" type="submit" value="absenden">
