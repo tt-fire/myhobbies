@@ -12,7 +12,10 @@
                     <ul class="list-group">
                         @foreach($tags as $tag)
                             <li class="list-group-item"> 
-                                <a title="Detailansicht" class="ml-2"> {{ $tag->name }} </a>
+                                <span style="font-size: 130%" class="mr-2 badge badge-{{ $tag->style }}">
+                                     {{ $tag->name }}
+                                </span>
+                                ({{ $tag->style }})
                                 <a class="ml-2 btn btn-light btn-sm" href="/tag/{{ $tag->id }}/edit"><i class="fas fa-pen"></i> Bearbeiten </a>
                                 <form ​ style="display: inline;"​ action="/tag/{{ $tag->id }}" ​ method="post"​ >
                                     @csrf
