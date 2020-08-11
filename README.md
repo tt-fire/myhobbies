@@ -81,6 +81,17 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## Docker-implementation
 based on the Info from the website: https://www.digitalocean.com/community/tutorials/how-to-install-and-set-up-laravel-with-docker-compose-on-ubuntu-20-04
 
+requirement: docker, docker-compose
+	"sudo apt install docker docker-compose"
+
+.env-Datei anlegen:
+	"cp .env.example .env" 
+anpassen .env-Datei
+	nano .env
+
 start: use command "sudo ./docker-start.sh"
 
 end: execute "sudo ./docker-end.sh"
+
+go to shell (app-laravel): "sudo docker-compose exec app bash"
+
