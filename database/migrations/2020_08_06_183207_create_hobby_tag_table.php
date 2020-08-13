@@ -19,7 +19,7 @@ class CreateHobbyTagTable extends Migration
             $table->timestamps();
             
             //Definition neuer Primärschlüssel - dadurch kann eine Kombination von hobby und tag nur einmal erfolgen!
-            $table->primary('hobby_id', 'tag_id');
+            $table->primary(['hobby_id', 'tag_id'], 'Kombi');
             
             // Foreign Key Contstraints = Verbindung zu Fremdschlüssel
             // onDelete = wenn die Fremdschlüssel gelöscht werden!
