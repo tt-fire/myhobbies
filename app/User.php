@@ -10,6 +10,14 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+
+    //Verknüfungen: 1:n - ein user kann mehrere Hobbies haben, deshalb funktion Plural!
+    public function hobbies() {
+        return $this->hasMany('App\Hobby');
+    }
+    
+    
+
     /**
      * The attributes that are mass assignable.
      *

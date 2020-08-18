@@ -8,4 +8,9 @@ class Tag extends Model
 {
     //
     protected $fillable = ['name', 'style'];
+
+    //Eloquent RElationship
+    public function hobbies() {
+        return $this->belongsToMany('App\Hobby');
+    }
 }
