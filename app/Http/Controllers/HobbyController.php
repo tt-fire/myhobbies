@@ -14,7 +14,12 @@ class HobbyController extends Controller
      */
     public function index()
     {
-        $hobbies = Hobby::all();
+        // alle Hobbies anzeigen:    
+        // $hobbies = Hobby::all();
+
+        // nur 10 Hobbies auf einer Seite anzeigen!
+        $hobbies = Hobby::paginate(10);
+        
         // dd($hobbies); //DD steht für Dump und Die
         //zeigt alle Datensätze an
         return view('hobby.index')->with('hobbies', $hobbies);
