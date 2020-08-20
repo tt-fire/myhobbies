@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Hobby;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon; //carbon ist für die direkte anwendung in der Ausgabe verantwortlich!
 
 class HobbyController extends Controller
 {
@@ -18,8 +19,10 @@ class HobbyController extends Controller
         // $hobbies = Hobby::all();
 
         // nur 10 Hobbies auf einer Seite anzeigen!
-        $hobbies = Hobby::paginate(10);
-        
+        // $hobbies = Hobby::paginate(10);
+        // nach Datum sortieren! absteigend
+        $hobbies = Hobby::orderBy('created_at','DESC')->paginate(10);
+
         // dd($hobbies); //DD steht für Dump und Die
         //zeigt alle Datensätze an
         return view('hobby.index')->with('hobbies', $hobbies);
