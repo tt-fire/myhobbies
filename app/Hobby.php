@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Hobby extends Model
 {
     //muss definiert werden welche Felder beschrieben werden dürfen!
-    protected $fillable = ['name', 'beschreibung'];
+    protected $fillable = ['name', 'beschreibung', 'user_id'];
 
     //Eloquent - Relationships!
     //funktion im Singular, da nur ein User erwartet wird!
