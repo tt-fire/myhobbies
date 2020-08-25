@@ -30,3 +30,6 @@ Route::resource('hobby', 'HobbyController');
 
 //Route für Tags 
 Route::resource('tag', 'TagController');
+
+//Route für User
+Route::resource('user', 'UserController');

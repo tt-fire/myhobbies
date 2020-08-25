@@ -14,7 +14,7 @@
                             <li class="list-group-item"> 
                                 <a title="Detailansicht" class="ml-2" href="/hobby/{{ $hobby->id }}"> {{ $hobby->name }} </a>
 
-                            <span class="mx-2">Von {{ $hobby->user->name }} ({{ $hobby->user->hobbies->count() }} Hobbies)</span>
+                            <span class="mx-2">Von <a href="/user/{{$hobby->user->id}}"> {{ $hobby->user->name }} </a> ({{ $hobby->user->hobbies->count() }} Hobbies)</span>
 
                                 <a class="ml-2 btn btn-light btn-sm" href="/hobby/{{ $hobby->id }}/edit"><i class="fas fa-pen"></i> Bearbeiten </a>
                                 <form ​ style="display: inline;"​ action="/hobby/{{ $hobby->id }}" ​ method="post"​ >
