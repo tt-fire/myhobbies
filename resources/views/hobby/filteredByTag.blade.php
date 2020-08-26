@@ -6,7 +6,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Alle Hobbies</div>
+                <div class="card-header">Alle Hobbies gefiltert nach <span class="ml-2 badge badge-{{ $tag->style }}" style="font-size: 120%">{{ $tag->name ?? '' }}</span>
+                    <a class="float-right" href="/hobby">Alle Hobbies anzeigen</a>
+                </div>
 
                 <div class="card-body">
                     <ul class="list-group">
