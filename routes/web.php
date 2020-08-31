@@ -36,3 +36,8 @@ Route::resource('user', 'UserController');
 
 //Route für funktion Tags auflistung! {tag_id} ist nur ein Platzhalter für in dem FAll die ID!
 Route::get('/hobby/tag/{tag_id}', 'hobbyTagController@getFilteredHobbies')->name('hobby_tag');
+
+// Route für Tags bei Hobby hinzufügen
+Route::get('/hobby/{hobby_id}/tag/{tag_id}/attach', 'hobbyTagController@attachTag');
+// Route für Tags bei Hobby entfernen
+Route::get('/hobby/{hobby_id}/tag/{tag_id}/detach', 'hobbyTagController@detachTag');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tag; //weil mit TAg model gearbeitet wird!
+use App\Hobby;
 
 class hobbyTagController extends Controller
 {
@@ -40,4 +41,33 @@ class hobbyTagController extends Controller
 
 
     } 
+
+    // zum hinzufügen und entfernen von Tags bei den Hobbies
+    // route in Webs
+
+    public function attachTag($hobby_id, $tag_id){
+
+        //filtern der hobbies nach der Hobby ID
+        $hobby = Hobby::find($hobby_id);
+        //diesem Hobby dann den Tag hinzufügen
+        $hobby->tags()->attach($tag_id);
+
+        $tag = Tag::find($tag_id); //für Ausgabe des Tags in der Meldung!
+
+        //Ausgabe: mit Bestätigungsmeldung in der Detailansicht!
+        return back()->with('meldung_success', 'Der Tag <b>'. $tag->name .'</b> wurde erfolgreich hinzugefügt.');
+
+    }
+
+    public function detachTag($hobby_id, $tag_id){
+       
+        $hobby = Hobby::find($hobby_id);
+        $hobby->tags()->detach($tag_id);
+
+        $tag = Tag::find($tag_id);
+
+        return back()->with('meldung_success', 'Der Tag <b>'. $tag->name .'</b> wurde erfolgreich entfernt.');
+
+    }
+
 }

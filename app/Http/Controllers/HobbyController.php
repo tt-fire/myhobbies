@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Hobby;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon; //carbon ist für die direkte anwendung in der Ausgabe verantwortlich!
+use Illuminate\Support\Facades\Session; // um die Session zu erweitern, für Rück-Meldung von Tags wiedergabe!
 
 class HobbyController extends Controller
 {
@@ -85,8 +87,23 @@ class HobbyController extends Controller
      */
     public function show(Hobby $hobby)
     {
+
+        
+        $alleTags = Tag::all(); //alle Tags holen!
+        $verwTags = $hobby->tags; //die bereits verwendeten Tags
+        $verfTags = $alleTags->diff($verwTags); //alle Tags abzüglich der verwendeten!
+
+
+        $meldung_success = Session::get('meldung_success');
+
         //zeigt einen einzelnen Datensatz an
-        return view('hobby.show')->with('hobby', $hobby);
+        return view('hobby.show')->with(
+            [
+                'meldung_success' => $meldung_success,
+                'verfTags' => $verfTags,
+                'hobby'=> $hobby
+            ]
+        );
     }
 
     /**
