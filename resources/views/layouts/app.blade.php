@@ -25,8 +25,14 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                @auth
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                     MyHobbies
+                @endauth
+                @guest
+                     <a class="navbar-brand" href="{{ url('/') }}">
+                    MyHobbies                   
+                @endguest
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -36,8 +42,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                       <li class="nav-item">
-                          <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">Startseite</a>
-                      </li>
+                            @auth
+                                <a class="nav-link {{ Request::is('home') ? 'active' : '' }}" href="/home">Home</a>
+                            @endauth
+                            @guest
+                                <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">Startseite</a>
+                            @endguest
+                        </li>
                       <li class="nav-item">
                           <a class="nav-link {{ Request::is('hobby*') ? 'active' : '' }}" href="/hobby">Hobbies</a>
                       </li>
@@ -94,7 +105,14 @@
                     </div>
                 </div>
             @endisset
-            
+            @isset($meldung_hinweis)
+            <div class="container">
+                <div class="alert alert-warning" role="alert">
+                    {!! $meldung_hinweis !!}
+                </div>
+            </div>
+        @endisset
+
             @if($errors->any())
                 <div class="container">
                     <div class="alert alert-danger">

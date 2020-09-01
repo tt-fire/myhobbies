@@ -74,9 +74,19 @@ class HobbyController extends Controller
         $hobby->save();
         //return redirect('/hobby'); //für die Ausgabe des Erfolges wird die Index Methode wieder aufgerufen! deshalb auskommentiert
         // weil bei return geht es über die URL dann erst auf die index dabei ginge das "with" verloren!
+        /*
+        // weiterleiten auf Detail-seite
         return $this->index()->with([
             'meldung_success' => 'Das Hobby <b>' . $hobby->name . '</b> wurde angelegt.'
         ]);
+        */
+
+        //nach dem Anlegen von Name und info -> zur Detailansicht weiterleiten!
+        return redirect('/hobby/' . $hobby->id)->with(
+            [
+                'meldung_hinweis' => 'Bitte weise ein paar Tags zu!'
+            ]
+        );
     }
 
     /**
@@ -94,11 +104,13 @@ class HobbyController extends Controller
         $verfTags = $alleTags->diff($verwTags); //alle Tags abzüglich der verwendeten!
 
 
-        $meldung_success = Session::get('meldung_success');
+        $meldung_success = Session::get('meldung_success'); //die Meldung Success von hobbyTagController auffangen und erneut wiedergeben!
+        $meldung_hinweis = Session::get('meldung_hinweis'); //die Meldung Hinweis von create funktion erneuern
 
         //zeigt einen einzelnen Datensatz an
         return view('hobby.show')->with(
             [
+                'meldung_hinweis' => $meldung_hinweis,
                 'meldung_success' => $meldung_success,
                 'verfTags' => $verfTags,
                 'hobby'=> $hobby
