@@ -25,9 +25,18 @@ class HobbyController extends Controller
         // nach Datum sortieren! absteigend
         $hobbies = Hobby::orderBy('created_at','DESC')->paginate(10);
 
+        //meldung success mit Facades rein laden und neu übergeben, dass der Back button von Del richtig funktioniert
+        $meldung_success = Session::get('meldung_success');
+
+
         // dd($hobbies); //DD steht für Dump und Die
         //zeigt alle Datensätze an
-        return view('hobby.index')->with('hobbies', $hobbies);
+        return view('hobby.index')->with(
+            [
+                'hobbies' => $hobbies,
+                'meldung_success' => $meldung_success
+            ]
+        );
     }
 
     /**
@@ -178,7 +187,8 @@ class HobbyController extends Controller
         
         $hobby->delete();
         
-        return $this->index()->with([
+        //return $this->index()->with([     //damit kommt man immer auf die Index zurück jedoch hin und wieder nicht gewollt!
+        return back()->with([
             'meldung_success' => 'Das Hobby <b>' . $oldName . '</b> wurde ​ gelöscht!​'
         ]);
     }
