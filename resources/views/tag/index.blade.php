@@ -22,6 +22,7 @@
                                     @method('DELETE')
                                     <input class="btn btn-sm btn-outline-danger ml-2" type="submit" value="Löschen">
                                 </form>
+                                <span class="float-right"><a href="/hobby/tag/{{ $tag->id }}">{{ $tag->hobbies()->count()}} mal verwendet</a></span>
                             </li>
                         @endforeach
                     </ul>
