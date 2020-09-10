@@ -5,48 +5,66 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    <h2>Hallo {{ auth()->user()->name }}</h2>
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+
+                    <div class="row">
+                        <div class="col-md-9">
+
+                            <h2>Hallo {{auth()->user()->name }}</h2>
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+
+
+                            <h5>Dein Motto</h5>
+                            <p>{{ auth()->user()->motto ?? '' }}</p>
+
+                            <h5>Deine "Über-Mich" - Beschreibung</h5>
+                            <p>{{ auth()->user()->ueber_mich ?? '' }}</p>
+
+                            <p>
+                                <a href="/user/{{ auth()->user()->id }}/edit" class="btn btn-primary">Profil bearbeiten</a>
+                            </p>
                         </div>
-                    @endif
+                        <div class="col-md-3">
+                            <img class="img-thumbnail" src="/img/300x400.jpg" alt="{{ auth()->user()->name }}">
+                        </div>
+                    </div>
 
-                    {{ __('You are logged in!') }} <br>
-                    <br>
-
-                @isset($hobbies)
-                    <h5 class="mt-3">Deine Hobbies</h5>
-
-                    @if($hobbies->count()==0)
-                        Du hast noch keine Hobbies angelegt!
-                    @endif
-
-                    <ul class="list-group">
+                    @isset($hobbies)
+                        @if($hobbies->count() > 0)
+                            <h5>Deine Hobbies</h5>
+                        @endif
+                        <ul class="list-group">
                         @foreach($hobbies as $hobby)
-                            <li class="list-group-item"> 
-                                <a title="Detailansicht" class="ml-2" href="/hobby/{{ $hobby->id }}"> {{ $hobby->name }} </a>
+                        <li class="list-group-item">
 
-                                <a class="ml-2 btn btn-light btn-sm" href="/hobby/{{ $hobby->id }}/edit"><i class="fas fa-pen"></i> Bearbeiten </a>
-                                <form ​ style="display: inline;"​ action="/hobby/{{ $hobby->id }}" ​ method="post"​ >
-                                    @csrf
-                                    @method('DELETE')
-                                    <input class="btn btn-sm btn-outline-danger ml-2" type="submit" value="Löschen">
-                                </form>
+                            <a title="Details anzeigen" href="/hobby/{{ $hobby->id }}">
+                                <img src="/img/thumb_quer.jpg" alt="thumb"></a>
+
+                            {{ $hobby->name }} <a class="ml-2" href="/hobby/{{ $hobby->id }}">Detailansicht</a>
+
+                            <a class="ml-2 btn btn-sm btn-outline-primary" href="/hobby/{{ $hobby->id }}/edit"><i class="fas fa-edit"></i> Bearbeiten</a>
+                            <form style="display: inline;" action="/hobby/{{ $hobby->id }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <input class="btn btn-outline-danger btn-sm ml-2" type="submit" value="Löschen">
+                            </form>
                             <div class="float-right">{{ $hobby->created_at->diffForHumans() }}</div>
                             <br>
                             @foreach($hobby->tags as $tag)
-                                <a class="badge badge-{{ $tag->style }}" href="/hobby/tag/{{ $tag->id }}">{{ $tag->name }}</a>
+                                <a class="badge badge-{{$tag->style}}" href="/hobby/tag/{{ $tag->id }}">{{ $tag->name }}</a>
                             @endforeach
-                            </li>
-                        @endforeach
-                    </ul>
-                @endisset
+                        </li>
+                         @endforeach
+                        </ul>
+                    @endisset
 
-                    <a class="btn btn-success btn-sm" href="/hobby/create"><i class="fas fa-plus-circle"></i>Neues Hobby anlegen</a>
+                    <a class="btn btn-success btn-sm mt-3   " href="/hobby/create"><i class="fas fa-plus-circle"></i> Neues Hobby anlegen</a>
                 </div>
             </div>
         </div>
