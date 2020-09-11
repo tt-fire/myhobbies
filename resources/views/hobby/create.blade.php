@@ -10,13 +10,20 @@
 
                 <div class="card-body">
 
-                    <form action = "/hobby" method="post">
+                    <form autocomplete="off" action = "/hobby" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control {{ $errors->has('name') ? 'border-danger' : '' }}" id="name" name="name" value="{{ old('name') }}">
                             <small class="form-text text-danger"> {!! $errors->first('name') !!} </small> 
                         </div>
+
+                        <div class="form-group">
+                            <label for="bild">Bild</label>
+                            <input type="file" class="form-control {{ $errors->has('bild') ? 'border-danger' : '' }}" id="bild" name="bild" value="">
+                            <small class="form-text text-danger"> {!! $errors->first('bild') !!} </small> 
+                        </div>
+
                         <div class="form-group">
                             <label for="beschreibung">Beschreibung</label>
                             <textarea class="form-control {{ $errors->has('beschreibung') ? 'border-danger' : '' }}" id="beschreibung" name="beschreibung" rows="5">{{ old('beschreibung') }}</textarea>

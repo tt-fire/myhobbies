@@ -67,7 +67,8 @@ class HobbyController extends Controller
             [
                 'name' => 'required|min:3', //muss gefüllt sein und mind. 3 Zeichen!
                 // nachschauen unter Laravel Docs Validation und Version!
-                'beschreibung' => 'required|min:5'
+                'beschreibung' => 'required|min:5',
+                'bild' => 'mimes:jpg,jpeg,bmp,png,gif'
             ]
         );
         
@@ -155,11 +156,12 @@ class HobbyController extends Controller
         
         // im prinzip von der "store" 
         
-        $request->validate(
+        $request->validate( //laravel validation!
           [
             'name' => 'required|min:3', //muss gefüllt sein und mind. 3 Zeichen!
             // nachschauen unter Laravel Docs Validation und Version!
-            'beschreibung' => 'required|min:5'
+            'beschreibung' => 'required|min:5',
+            'bild' => 'mimes:jpg,jpeg,bmp,png,gif' //Datei eigenschaften einschränken usw...
           ]
         );
         
@@ -168,6 +170,7 @@ class HobbyController extends Controller
         $hobby->update([
             'name' => $request->name,
             'beschreibung' => $request->beschreibung
+            
         ]);
 
         return $this->index()->with([

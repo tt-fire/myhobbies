@@ -10,7 +10,7 @@
 
                 <div class="card-body">
 
-                    <form action = "/hobby/{{ $hobby->id }}" method="post">
+                    <form autocomplete="off" action="/hobby/{{ $hobby->id }}" method="post" enctype="multipart/form-data" {{-- enctype = für DAteien! --}}>
                         @csrf
                         @method('PUT')
                         <div class="form-group">
@@ -18,6 +18,13 @@
                             <input type="text" class="form-control {{ $errors->has('name') ? 'border-danger' : '' }}" id="name" name="name" value="{{ old('name') ?? $hobby->name }}">
                             <small class="form-text text-danger"> {!! $errors->first('name') !!} </small> 
                         </div>
+
+                        <div class="form-group">
+                            <label for="bild">Bild</label>
+                            <input type="file" class="form-control {{ $errors->has('bild') ? 'border-danger' : '' }}" id="bild" name="bild" value="">
+                            <small class="form-text text-danger"> {!! $errors->first('bild') !!} </small> 
+                        </div>
+
                         <div class="form-group">
                             <label for="beschreibung">Beschreibung</label>
                             <textarea class="form-control {{ $errors->has('beschreibung') ? 'border-danger' : '' }}" id="beschreibung" name="beschreibung" rows="5">{{ old('beschreibung') ?? $hobby->beschreibung }}</textarea>
