@@ -7,6 +7,7 @@ use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon; //carbon ist für die direkte anwendung in der Ausgabe verantwortlich!
 use Illuminate\Support\Facades\Session; // um die Session zu erweitern, für Rück-Meldung von Tags wiedergabe!
+use Intervention\Image\Facades\Image; //einbinden von Intervention = Bildbearb.
 
 class HobbyController extends Controller
 {
