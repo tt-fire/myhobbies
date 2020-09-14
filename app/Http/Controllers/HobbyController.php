@@ -164,6 +164,17 @@ class HobbyController extends Controller
             'bild' => 'mimes:jpg,jpeg,bmp,png,gif' //Datei eigenschaften einschränken usw...
           ]
         );
+
+        if($request->bild){
+            $bild = Image::make($request->bild);
+            $breite = $bild->width();
+            $hoehe = $bild->height();
+            if($breite > $hoehe) {
+                dd("Querformat");
+            } else {
+                dd("Hochformat");
+            }
+        }
         
         
         // hobby schreiben - update!
