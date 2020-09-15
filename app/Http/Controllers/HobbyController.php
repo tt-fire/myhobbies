@@ -170,9 +170,27 @@ class HobbyController extends Controller
             $breite = $bild->width();
             $hoehe = $bild->height();
             if($breite > $hoehe) {
-                dd("Querformat");
+                //dd("Querformat");
+
+                //Querformat
+                Image::make($request->bild)
+                    ->widen(1200)
+                    ->save(public_path() . '/img/hobby/' . $hobby->id . '_gross.jpg');
+
+                Image::make($request->bild)
+                    ->widen(60)
+                    ->save(public_path() . '/img/hobby/' . $hobby->id . '_thumb.jpg');
             } else {
-                dd("Hochformat");
+                //dd("Hochformat");
+
+                //Hochformat - Umwandlung
+                Image::make($request->bild)
+                    ->heighten(900)
+                    ->save(public_path() . '/img/hobby/' . $hobby->id . '_gross.jpg');
+
+                Image::make($request->bild)
+                    ->heighten(60)
+                    ->save(public_path() . '/img/hobby/' . $hobby->id . '_thumb.jpg');
             }
         }
         
