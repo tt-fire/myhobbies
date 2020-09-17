@@ -14,9 +14,11 @@
                         <ul class="list-group">
                             @foreach($hobbies as $hobby)
                                 <li class="list-group-item">
-
-                                    <a class="mr-1" title="Details anzeigen" href="/hobby/{{ $hobby->id }}">
-                                        <img src="/img/thumb_quer.jpg" alt="thumb"></a>
+                                    
+                                    @if(file_exists("img/hobby/" . $hobby->id . "_thumb.jpg"))
+                                        <a class="mr-1" title="Details anzeigen" href="/hobby/{{ $hobby->id }}">
+                                            <img src="/img/hobby/{{ $hobby->id }}_thumb.jpg" alt="thumb"></a>
+                                    @endif
 
                                     {{ $hobby->name }} <a class="ml-2" href="/hobby/{{ $hobby->id }}">Detailansicht</a>
 

@@ -31,6 +31,7 @@
                             </p>
                         </div>
                         <div class="col-md-3">
+
                             <img class="img-thumbnail" src="/img/300x400.jpg" alt="{{ auth()->user()->name }}">
                         </div>
                     </div>
@@ -43,8 +44,10 @@
                         @foreach($hobbies as $hobby)
                         <li class="list-group-item">
 
-                            <a title="Details anzeigen" href="/hobby/{{ $hobby->id }}">
-                                <img src="/img/thumb_quer.jpg" alt="thumb"></a>
+                            @if(file_exists("img/hobby/" . $hobby->id . "_thumb.jpg"))
+                                <a class="mr-1" title="Details anzeigen" href="/hobby/{{ $hobby->id }}">
+                                    <img src="/img/hobby/{{ $hobby->id }}_thumb.jpg" alt="thumb"></a>
+                            @endif
 
                             {{ $hobby->name }} <a class="ml-2" href="/hobby/{{ $hobby->id }}">Detailansicht</a>
 

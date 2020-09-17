@@ -33,9 +33,13 @@
                                 </p>
                             </div>
                             <div class="col-md-3">
-                                <a href="/img/400x300.jpg" data-lightbox="400x300.jpg" data-title="{{ $hobby->name }}">
-                                    <img class="img-fluid" src="/img/400x300.jpg" alt="">
+
+                                @if(file_exists("img/hobby/" . $hobby->id . "_gross.jpg"))
+                                <a href="/img/hobby/{{ $hobby->id }}_gross.jpg" data-lightbox="{{ $hobby->id }}_gross.jpg" data-title="{{ $hobby->name }}">
+                                    <img class="img-fluid" src="/img/hobby/{{ $hobby->id }}_gross.jpg" alt="/img/400x300.jpg">
                                 </a>
+                                @endif
+
                                 <i class="fa fa-search-plus"></i> Bild anklicken zum Vergrößern
                             </div>
                         </div>
