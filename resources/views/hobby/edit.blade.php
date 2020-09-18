@@ -22,6 +22,7 @@
                         <div class="mb-2">
                             @if(file_exists("img/hobby/" . $hobby->id . "_gross.jpg"))
                                 <img style="max-with: 400px; max-height: 300px;" src="/img/hobby/{{ $hobby->id }}_gross.jpg" alt="thumb">
+                                <div class="float-right"><a class="btn btn-sm btn-outline-danger" href="/delete-image/hobby/{{ $hobby->id }}">Bild löschen</a></div>
                             @endif
                         </div>
 
