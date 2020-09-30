@@ -21,7 +21,10 @@
                                             <li class="list-group-item">
 
                                                 <a title="Details anzeigen" href="/hobby/{{ $hobby->id }}">
-                                                    <img src="/img/thumb_quer.jpg" alt="thumb"></a>
+                                                    @if(file_exists("img/hobby/" . $hobby->id . "_thumb.jpg"))
+                                                        <img src="/img/hobby/{{ $hobby->id }}_thumb.jpg" alt="thumb">
+                                                    @endif
+                                                </a>
 
                                                 {{ $hobby->name }} <a class="ml-2" href="/hobby/{{ $hobby->id }}">Detailansicht</a>
 
@@ -37,9 +40,29 @@
                                     <p>{{ $user->name }} hat noch keine Hobbies angelegt.</p>
                                 @endif
                             </div>
+
                             <div class="col-md-3">
-                                <img class="img-thumbnail" src="/img/300x400.jpg" alt="{{ $user->name }}">
+
+                                @auth
+
+                                    @if(file_exists("img/user/User_" . $user->id . ".jpg"))
+                                    <a href="/img/user/User_{{ $user->id }}.jpg" data-lightbox="User_{{ $user->id }}.jpg" data-title="{{ $user->name }}">
+                                        <img class="img-fluid" src="/img/user/User_{{ $user->id }}.jpg" alt="/img/300x400.jpg">
+                                    </a>
+                                    @endif
+
+                                    <i class="fa fa-search-plus"></i> Bild anklicken zum Vergrößern
+
+                                @endauth
+
+                                @guest 
+                                    @if(file_exists("img/user/User_" . $user->id . "_verpixelt.jpg"))
+                                        <img class="img-fluid" src="/img/user/User_{{ $user->id }}_verpixelt.jpg" alt="/img/300x400.jpg">
+                                    @endif
+                                @endguest
+
                             </div>
+
                         </div>
 
 

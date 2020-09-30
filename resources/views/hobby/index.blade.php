@@ -31,7 +31,12 @@
                                     <a class="ml-2" href="/hobby/{{ $hobby->id }}">Detailansicht</a>
 
                                     <span class="mx-2">Von <a href="/user/{{$hobby->user->id}}">{{ $hobby->user->name }}</a> ( {{ $hobby->user->hobbies->count() }} Hobbies)
-                                    <a href="/user/{{ $hobby->user->id }}"><img class="rounded" src="/img/thumb_hoch.jpg"></a>
+                                    <a href="/user/{{ $hobby->user->id }}">
+                                        
+                                    @if(file_exists("img/user/User_" . $hobby->user->id . "_thumb.jpg"))
+                                            <img class="img-fluid" src="/img/user/User_{{ $hobby->user->id }}_thumb.jpg" alt="/img/300x400.jpg">
+                                        </a>
+                                    @endif
                                     </span>
 
                                     <a class="ml-2 btn btn-sm btn-outline-primary" href="/hobby/{{ $hobby->id }}/edit"><i class="fas fa-edit"></i> Bearbeiten</a>

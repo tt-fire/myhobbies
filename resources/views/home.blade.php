@@ -30,10 +30,30 @@
                                 <a href="/user/{{ auth()->user()->id }}/edit" class="btn btn-primary">Profil bearbeiten</a>
                             </p>
                         </div>
+
                         <div class="col-md-3">
 
-                            <img class="img-thumbnail" src="/img/300x400.jpg" alt="{{ auth()->user()->name }}">
+                            @auth
+
+                                @if(file_exists("img/user/User_" . auth()->user()->id . ".jpg"))
+                                <a href="/img/user/User_{{ auth()->user()->id }}.jpg" data-lightbox="User_{{ auth()->user()->id }}.jpg" data-title="{{ auth()->user()->id }}">
+                                    <img class="img-fluid" src="/img/user/User_{{ auth()->user()->id }}.jpg" alt="/img/300x400.jpg">
+                                </a>
+                                @endif
+
+                                <i class="fa fa-search-plus"></i> Bild anklicken zum Vergrößern
+
+                            @endauth
+
+                            @guest 
+                                @if(file_exists("img/user/User_" . auth()->user()->id . "_verpixelt.jpg"))
+                                    <img class="img-fluid" src="/img/user/User_{{ auth()->user()->id }}_verpixelt.jpg" alt="/img/300x400.jpg">
+                                @endif
+                            @endguest
+
                         </div>
+
+
                     </div>
 
                     @isset($hobbies)
