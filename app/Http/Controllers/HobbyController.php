@@ -11,6 +11,17 @@ use Intervention\Image\Facades\Image; //einbinden von Intervention = Bildbearb.
 
 class HobbyController extends Controller
 {
+
+    // Konstruktor - wird immer aufgerufen, wenn eine Klasse aufgerufen wird!
+    // für Auth - bzw. Autorisierung
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']); // gleicher effekt wie wenn in web.php mit ->middleware('auth') 
+        // hier kann man verschiedene methoden ausnehmen! zb. Index Seite und Detail!
+
+    }
+
+
     /**
      * Display a listing of the resource.
      *
