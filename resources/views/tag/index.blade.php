@@ -16,12 +16,16 @@
                                      {{ $tag->name }}
                                 </span>
                                 ({{ $tag->style }})
-                                <a class="ml-2 btn btn-light btn-sm" href="/tag/{{ $tag->id }}/edit"><i class="fas fa-pen"></i> Bearbeiten </a>
-                                <form ​ style="display: inline;"​ action="/tag/{{ $tag->id }}" ​ method="post"​ >
-                                    @csrf
-                                    @method('DELETE')
-                                    <input class="btn btn-sm btn-outline-danger ml-2" type="submit" value="Löschen">
-                                </form>
+
+                                @auth
+                                    <a class="ml-2 btn btn-light btn-sm" href="/tag/{{ $tag->id }}/edit"><i class="fas fa-pen"></i> Bearbeiten </a>
+                                    <form ​ style="display: inline;"​ action="/tag/{{ $tag->id }}" ​ method="post"​ >
+                                        @csrf
+                                        @method('DELETE')
+                                        <input class="btn btn-sm btn-outline-danger ml-2" type="submit" value="Löschen">
+                                    </form>
+                                @endauth
+
                                 <span class="float-right"><a href="/hobby/tag/{{ $tag->id }}">{{ $tag->hobbies()->count()}} mal verwendet</a></span>
                             </li>
                         @endforeach
