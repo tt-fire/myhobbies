@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image; //einbinden von Intervention = Bildbearb.
+use Illuminate\Support\Facades\Gate; // gate fassade für Login bzw. Autorisierung
 
 class UserController extends Controller
 {
@@ -64,6 +65,15 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        // für Aut.
+        if (auth()->guest()) {
+            abort(403, "nur für User");
+        }
+
+        abort_unless($user->id === auth()->id() || auth()->user()->rolle === 'admin' , 403, 'nicht erlaubt');
+        // wenn eine der beiden bedingungen nicht erfüllt ist dann Fehler sonst ok!
+
+
         //einzelnen Datensatz bearbeiten
         return view('user.edit')->with('user' , $user);
     }
@@ -77,6 +87,10 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        // für Aut.
+        abort_unless(Gate::allows('update', $user), 403, "update nicht erlaubt");
+
+
         //schreibt den bearbeiteten user in die DB
         // benötigt die Methode PUT oder Patch -> im Formular Hidden Feld "@method(put)"!!!
         // request = felder evt. bearbeitet; hobby = instanz die bearbeitet wird
