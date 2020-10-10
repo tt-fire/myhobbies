@@ -71,7 +71,7 @@ class HobbyPolicy
     {
         // = update vom controller
         // nur der eigene darf seine updaten!:=
-        return $user->id ==== $hobby->user_id; // nur wen user id = hobby-user ID dann darf man bearbeiten!
+        return $user->id === $hobby->user_id; // nur wen user id = hobby-user ID dann darf man bearbeiten!
 
     }
 
@@ -85,7 +85,7 @@ class HobbyPolicy
     public function delete(User $user, Hobby $hobby)
     {
         // = destroy vom controller
-        return $user->id ==== $hobby->user_id;
+        return $user->id === $hobby->user_id;
     }
 
     /**

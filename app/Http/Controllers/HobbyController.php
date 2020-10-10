@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon; //carbon ist für die direkte anwendung in der Ausgabe verantwortlich!
 use Illuminate\Support\Facades\Session; // um die Session zu erweitern, für Rück-Meldung von Tags wiedergabe!
 use Intervention\Image\Facades\Image; //einbinden von Intervention = Bildbearb.
+use Illuminate\Support\Facades\Gate; // gate fassade für Login bzw. Autorisierung
 
 class HobbyController extends Controller
 {
@@ -155,6 +156,16 @@ class HobbyController extends Controller
      */
     public function edit(Hobby $hobby)
     {
+
+        if (auth()->guest()) {
+            abort(403, "nur für User");
+        }
+
+        abort_unless($hobby->user_id === auth()->id() || auth()->user()->rolle === 'admin' , 403, 'nicht erlaubt');
+        // wenn eine der beiden bedingungen nicht erfüllt ist dann Fehler sonst ok!
+
+
+
         //einzelnen Datensatz bearbeiten
         return view('hobby.edit')->with('hobby' , $hobby);
     }
@@ -168,6 +179,13 @@ class HobbyController extends Controller
      */
     public function update(Request $request, Hobby $hobby)
     {
+
+        abort_unless(Gate::allows('update', $hobby), 403, "update nicht erlaubt");
+        // mit Gate wird abgefragt, ob der User nach der HobbyPolicy das recht zum delete hat --> delete auf
+        // das delete in der Hobby Policy verwiesen!
+
+
+
         //schreibt das bearbeitete Hobby in die DB
         // benötigt die Methode PUT oder Patch -> im Formular Hidden Feld "@method(put)"!!!
         // request = felder evt. bearbeitet; hobby = instanz die bearbeitet wird
@@ -209,6 +227,14 @@ class HobbyController extends Controller
     public function destroy(Hobby $hobby)
     {
         //
+        if (auth()->guest()) {
+            abort(403, "nur für User");
+        }
+
+        abort_unless(Gate::allows('delete', $hobby), 403, 'nicht erlaubt');
+        // mit Gate wird abgefragt, ob der User nach der HobbyPolicy das recht zum delete hat --> delete auf
+        // das delete in der Hobby Policy verwiesen!
+
         $oldName = $hobby->name;
         
         $hobby->delete();
