@@ -10,6 +10,17 @@ class TagPolicy
 {
     use HandlesAuthorization;
 
+    // für front-end: --> @can greift auf policies zu nicht auf Middleware! deshalb muss man den 
+    // Admin hier als aller erstes ausnehmen!
+    public function before($user, $ability) {
+        if ($user->rolle === 'admin') {
+            return true;
+            //= admin darf alles!!!
+        }
+    }
+
+
+
     /**
      * Determine whether the user can view any models.
      *
@@ -30,7 +41,8 @@ class TagPolicy
      */
     public function view(User $user, Tag $tag)
     {
-        //
+        //nur Admin darf! --> bei allen Methoden außer der "viewAny" einsetzen???? -> before genügt!!!
+        //return $user->rolle === 'admin';
     }
 
     /**

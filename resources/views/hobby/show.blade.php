@@ -17,20 +17,31 @@
                                 <p>{{ $hobby->beschreibung }}</p>
 
                                 @if($hobby->tags->count() > 0)
-                                    <p>
-                                        <b>Verknüpfte Tags:</b> (klicken, zum entfernen)<br>
-                                        @foreach($hobby->tags as $tag)
-                                            <a class="badge badge-{{$tag->style}}" href="/hobby/{{$hobby->id}}/tag/{{$tag->id}}/detach">{{ $tag->name }}</a>
-                                        @endforeach
-                                    </p>
+                                    @can('update', $hobby)
+                                        <p>
+                                            <b>Verknüpfte Tags:</b> (klicken, zum entfernen)<br>
+                                            @foreach($hobby->tags as $tag)
+                                                <a class="badge badge-{{$tag->style}}" href="/hobby/{{$hobby->id}}/tag/{{$tag->id}}/detach">{{ $tag->name }}</a>
+                                            @endforeach
+                                        </p>
+                                    @else 
+                                        <p>
+                                            <b>Verknüpfte Tags:</b><br>
+                                            @foreach($hobby->tags as $tag)
+                                                <span class="badge badge-{{$tag->style}}">{{ $tag->name }}</span>
+                                            @endforeach
+                                        </p>
+                                    @endcan
                                 @endif
 
-                                <p>
-                                    <b>Verfügbare Tags:</b> (klicken, zum hinzufügen)<br>
-                                    @foreach($verfTags as $tag)
-                                        <a class="badge badge-{{$tag->style}}" href="/hobby/{{$hobby->id}}/tag/{{$tag->id}}/attach">{{ $tag->name }}</a>
-                                    @endforeach
-                                </p>
+                                @can('update', $hobby)
+                                    <p>
+                                        <b>Verfügbare Tags:</b> (klicken, zum hinzufügen)<br>
+                                        @foreach($verfTags as $tag)
+                                            <a class="badge badge-{{$tag->style}}" href="/hobby/{{$hobby->id}}/tag/{{$tag->id}}/attach">{{ $tag->name }}</a>
+                                        @endforeach
+                                    </p>
+                                @endcan
                             </div>
                             <div class="col-md-3">
 

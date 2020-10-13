@@ -27,12 +27,17 @@
                                     <a href="/user/{{ $hobby->user->id }}"><img class="rounded" src="/img/thumb_hoch.jpg"></a>
                                     </span>
 
-                                    <a class="ml-2 btn btn-sm btn-outline-primary" href="/hobby/{{ $hobby->id }}/edit"><i class="fas fa-edit"></i> Bearbeiten</a>
-                                    <form style="display: inline;" action="/hobby/{{ $hobby->id }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input class="btn btn-outline-danger btn-sm ml-2" type="submit" value="Löschen">
-                                    </form>
+                                    
+                                        <a class="ml-2 btn btn-sm btn-outline-primary" href="/hobby/{{ $hobby->id }}/edit"><i class="fas fa-edit"></i> Bearbeiten</a>
+                                    
+                                    
+                                        <form style="display: inline;" action="/hobby/{{ $hobby->id }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input class="btn btn-outline-danger btn-sm ml-2" type="submit" value="Löschen">
+                                        </form>
+                                        
+
                                     <div class="float-right">{{ $hobby->created_at->diffForHumans() }}</div>
                                     <br>
                                     @foreach($hobby->tags as $tag)

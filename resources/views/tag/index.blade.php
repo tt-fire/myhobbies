@@ -15,22 +15,27 @@
                                 <span style="font-size: 130%" class="mr-2 badge badge-{{ $tag->style }}">
                                      {{ $tag->name }}
                                 </span>
-                                ({{ $tag->style }})
+                                
 
-                                @auth
+                                @can('update', $tag)
+                                 ({{ $tag->style }})
                                     <a class="ml-2 btn btn-light btn-sm" href="/tag/{{ $tag->id }}/edit"><i class="fas fa-pen"></i> Bearbeiten </a>
+                                @endcan
+                                @can('delete', $tag)
                                     <form ​ style="display: inline;"​ action="/tag/{{ $tag->id }}" ​ method="post"​ >
                                         @csrf
                                         @method('DELETE')
                                         <input class="btn btn-sm btn-outline-danger ml-2" type="submit" value="Löschen">
                                     </form>
-                                @endauth
+                                @endcan
 
                                 <span class="float-right"><a href="/hobby/tag/{{ $tag->id }}">{{ $tag->hobbies()->count()}} mal verwendet</a></span>
                             </li>
                         @endforeach
                     </ul>
-                    <a class="btn btn-success btn-sm mt-3" href="/tag/create"> <i class="fas fa-plus-circle"></i> Neuen Tag anlegen</a>
+                    @can('create', $tag)
+                        <a class="btn btn-success btn-sm mt-3" href="/tag/create"> <i class="fas fa-plus-circle"></i> Neuen Tag anlegen</a>
+                    @endcan
                 </div>
             </div>
         </div>

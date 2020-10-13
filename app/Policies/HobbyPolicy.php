@@ -12,7 +12,8 @@ class HobbyPolicy
 
 
 
-    // für front-end:
+    // für front-end: --> @can greift auf policies zu nicht auf Middleware! deshalb muss man den 
+    // Admin hier als aller erstes ausnehmen!
     public function before($user, $ability) {
         if ($user->rolle === 'admin') {
             return true;
