@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Tag; //weil mit TAg model gearbeitet wird!
 use App\Hobby;
+use Illuminate\Support\Facades\Gate; //für Gate!
 
 class hobbyTagController extends Controller
 {
@@ -49,6 +50,16 @@ class hobbyTagController extends Controller
 
         //filtern der hobbies nach der Hobby ID
         $hobby = Hobby::find($hobby_id);
+
+        //Gate unter dem hobby weil man das braucht!
+        // 1.= Gate Facade use!
+        if (Gate::denies('connect_hobbyTag', $hobby)) {
+            //wenn das Gate aus dem "AuthServiceProvider" das Gate verweigert dann
+            //dies ruft die Funktion aus dem "AuthServiceProvider" auf und übergibt das $hobby! 
+            //den user müssen wir nicht übergeben, den bekommt man im AuthServiceProvider selbst!
+            abort(403, 'Das Hobby gehört dir nicht!');
+        }
+
         //diesem Hobby dann den Tag hinzufügen
         $hobby->tags()->attach($tag_id);
 
@@ -63,6 +74,11 @@ class hobbyTagController extends Controller
        
         $hobby = Hobby::find($hobby_id);
         $hobby->tags()->detach($tag_id);
+
+        if (Gate::denies('connect_hobbyTag', $hobby)) {
+
+            abort(403, 'Das Hobby gehört dir nicht!');
+        }
 
         $tag = Tag::find($tag_id);
 

@@ -25,6 +25,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        //hier kann man GATES definieren!
+        Gate::define('connect_hobbyTag', function($user, $hobby){
+            //nach dem define ist das erste der Name der frei wählbar ist! ->Anwendung des Gates im "hobbyTagController.php"!
+
+            return $user->id === $hobby->user_id || $user->rolle === 'admin'; 
+            //antwort ist boolish true oder false
+            // nach den beiden || ist die Definition für den Admin!
+
+        });
     }
 }

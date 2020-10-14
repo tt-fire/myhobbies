@@ -38,9 +38,14 @@ Route::resource('user', 'UserController');
 Route::get('/hobby/tag/{tag_id}', 'hobbyTagController@getFilteredHobbies')->name('hobby_tag');
 
 // Route für Tags bei Hobby hinzufügen
-Route::get('/hobby/{hobby_id}/tag/{tag_id}/attach', 'hobbyTagController@attachTag');
-// Route für Tags bei Hobby entfernen
-Route::get('/hobby/{hobby_id}/tag/{tag_id}/detach', 'hobbyTagController@detachTag');
+Route::get('/hobby/{hobby_id}/tag/{tag_id}/attach', 'hobbyTagController@attachTag')
+    ->name('hobby_tag_attach')   //das vergeben von namen kann man im terminal danach suchen! mit "php artisan route:list --name=hobby_"
+    ->middleware('auth')        //damit das nur autorisierte können! ansonsten können auch nicht eingeloggte mit dem richtigen link tags hinzufügen u entfernen!
+    ;       // + gate anlegen unter: "app/Providers/AuthServiceProvider.php"!!!
+    // Route für Tags bei Hobby entfernen
+Route::get('/hobby/{hobby_id}/tag/{tag_id}/detach', 'hobbyTagController@detachTag')
+    ->name('hobby_tag_detach')
+    ->middleware('auth');
 
 // Bilder vom Hobby löschen!
 Route::get('/delete-image/hobby/{hobby_id}', 'HobbyController@deleteImages');
