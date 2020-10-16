@@ -63,9 +63,13 @@
                         <div class="mt-3">
                             {{ $hobbies->links() }}
                         </div>
+
+
+
                     </div>
                 </div>
             </div>
+            @includeif('_partials.loeschenFormular')
         </div>
     </div>
 @endsection
