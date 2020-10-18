@@ -2,10 +2,14 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory; //neu in laravel 8!
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
+
+    use HasFactory;
+
     //
     protected $fillable = ['name', 'style'];
 

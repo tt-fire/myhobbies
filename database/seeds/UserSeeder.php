@@ -13,6 +13,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         //Aufruf der FAktory für 100 zufalls user!
+        //alte Aufruf:  
         factory(App\User::class, 100)->create()
         ->each(function ($user){ // Für jeden User 1-7 Hobbies
             factory(App\Hobby::class,rand(1,8))->create(
